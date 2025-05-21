@@ -1,17 +1,22 @@
 import { useState } from "react"
 
 const TodoInput = (props) => {
-  const {handleAddTodos, todoValue, setTodoValue} = props
+  const {handleAddTodos, todoValue, setTodoValue, editingIndex} = props
   
   return (
     <header>
-      <input placeholder="Enter todo..." value={todoValue} onChange={(e) => {
-        setTodoValue(e.target.value)
-      }} />
+      <input 
+        placeholder={editingIndex >= 0 ? "Edit todo..." : "Enter todo..."} 
+        value={todoValue} 
+        onChange={(e) => {
+          setTodoValue(e.target.value)
+        }} 
+      />
       <button onClick={() => {
         handleAddTodos(todoValue)
-        setTodoValue('')
-      }}>Add</button>
+      }}>
+        {editingIndex >= 0 ? "Save" : "Add"}
+      </button>
     </header>
   )
 }
